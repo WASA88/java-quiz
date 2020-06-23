@@ -1,7 +1,10 @@
 package lmgQuiz;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class LmgQuiz {
 	public static void main(String[] args) {
@@ -43,6 +46,13 @@ public class LmgQuiz {
 		 * select p.phone_number from employee e right join phone p on e.id = p.id 
 		 * where e.first_name = 'John'
 		 */
+		
+		System.out.println("5. มี Array ขนาด n ใน array จะไม่มีเลขซ้ำกัน");
+		System.out.println("ให้หาผลบวกของเลขที่มากที่สุด  n-1 จำนวน");
+		int[] arr1 = {1,3,5,7};
+		int[] arr2 = {4,1,3,8,2};
+		System.out.println(Arrays.toString(arr1) + " = "+ sumOfNumber(arr1));
+		System.out.println(Arrays.toString(arr2) + " = "+ sumOfNumber(arr2));
 	}
 	
 	public static int findSumOfString(String str) {
@@ -54,27 +64,14 @@ public class LmgQuiz {
 		return sum;
 	}
 	
-	public static String removeDuplicatetValue(int values[]) {
+	public static Set<Integer> removeDuplicatetValue(int values[]) {
 
-		HashMap<Integer, Integer> filloutDups = new HashMap<Integer, Integer>();
+		Set<Integer> set = new HashSet<>();
 		
-		String result = "";
-		int tmp = values[0];
-		filloutDups.put(values[0], 1);
-		
-		for (int i = 1; i < values.length; i++) {
-			if (values[i] == tmp) {
-				filloutDups.put(values[i], filloutDups.get(values[i]+1));;
-			} else {
-				filloutDups.put(values[i], 1);
-			}
-			tmp = values[i];
+		for (int i = 0; i < values.length; i++) {
+			set.add(values[i]);
 		}
-
-		for (Entry<Integer, Integer> filloutDup : filloutDups.entrySet()) {
-			result += filloutDup.getKey()+"," ;
-		}
-		return result;
+		return set;
 	}
 	
 	public static String isPalindrome(String str) {
@@ -87,6 +84,16 @@ public class LmgQuiz {
 		}
 		
 		return normalStr.equalsIgnoreCase(reverseStr)? "Yes" : "No";
+	}
+	
+	public static int sumOfNumber(int[] arr) {
+		int result = 0;
+		Arrays.sort(arr);
+		
+		for (int i = arr.length-1; i >= 1; i--) {
+			result += arr[i];
+		}
+		return result;
 	}
 }
 
